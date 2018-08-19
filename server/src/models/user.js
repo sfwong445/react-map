@@ -5,8 +5,9 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
     password: String,
-    lat: Number,
-    lng: Number
+    address: String,
+    city: String,
+    state: String
 });
 
 const User = mongoose.model("Users", userSchema);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form } from "semantic-ui-react";
 
 class Login extends Component {
     render() {
@@ -8,7 +8,7 @@ class Login extends Component {
                 <Form>
                     <Form.Field>
                         <label>Username</label>
-                        <input placeholder="Username" fluid/>
+                        <input placeholder="Username" fluid />
                     </Form.Field>
                     <Form.Field>
                         <label>Password</label>
