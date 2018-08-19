@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {Button} from "semantic-ui-react";
 import Home from "./containers/Home";
 import Register from "./containers/registerForm";
-import Find from './containers/FindComponent';
+import Find from './containers/Find';
 import "./App.css";
 
 class App extends Component {
