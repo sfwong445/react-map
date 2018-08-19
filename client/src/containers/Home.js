@@ -1,17 +1,13 @@
-import React, { Component } from "react";
-import LocationForm from "./locationForm";
-import "./Home.css";
+import React, { Component } from 'react';
 
 class Home extends Component {
     render() {
         return (
-            <div className="App-Home">
-                <div className="address-form">
-                    <LocationForm />
-                </div>
+            <div className="container">
+                <p>This is the home directory!</p>
             </div>
-        );
+        )
     }
 }
 
-export default Home;
+export default Home

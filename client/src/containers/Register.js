@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
 import "./Register.css";
 
+<<<<<<< HEAD
 import LocationService from "../services/LocationService";
+=======
+>>>>>>> 653e16f5d14ebbcb1257c475554e2d2bfa9131b1
 import AuthenticationService from "../services/AuthenticationService";
 
 class RegisterForm extends Component {
@@ -14,12 +17,18 @@ class RegisterForm extends Component {
             address: "",
             city: "",
             state: "",
+<<<<<<< HEAD
             latitude: "",
             longitude: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.getCoordinates = this.getCoordinates.bind(this);
+=======
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+>>>>>>> 653e16f5d14ebbcb1257c475554e2d2bfa9131b1
         this.Register = this.Register.bind(this);
     }
 
@@ -28,6 +37,7 @@ class RegisterForm extends Component {
             [event.target.name]: event.target.value
         });
     }
+<<<<<<< HEAD
     async getCoordinates() {
         const result = await LocationService.getGeoCoding(
             this.state.address,
@@ -42,13 +52,20 @@ class RegisterForm extends Component {
     }
     async Register() {
         await this.getCoordinates();
+=======
+    async Register() {
+>>>>>>> 653e16f5d14ebbcb1257c475554e2d2bfa9131b1
         const response = await AuthenticationService.register(
             this.state.username,
             this.state.password,
             this.state.latitude,
             this.state.longitude
+<<<<<<< HEAD
         )
         console.log(await response)
+=======
+        );
+>>>>>>> 653e16f5d14ebbcb1257c475554e2d2bfa9131b1
     }
 
     render() {
@@ -91,7 +108,13 @@ class RegisterForm extends Component {
                         value={this.state.state}
                         onChange={this.handleChange}
                     />
+<<<<<<< HEAD
                     <Button primary onClick={this.Register}>Submit</Button>
+=======
+                    <Button primary onClick={this.Register}>
+                        Submit
+                    </Button>
+>>>>>>> 653e16f5d14ebbcb1257c475554e2d2bfa9131b1
                 </Form>
             </div>
         );
