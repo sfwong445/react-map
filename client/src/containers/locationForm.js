@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button, Form } from "semantic-ui-react";
+import { Button, Form, Input } from "semantic-ui-react";
+import LocationService from '../services/LocationService';
 
 class LocationForm extends Component {
     constructor(props) {
@@ -8,15 +9,27 @@ class LocationForm extends Component {
         this.state = {
             addressValue: "",
             cityValue: "",
-            stateValue: ""
+            stateValue: "",
+            lat: '',
+            lng: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.getGeoCoordinates = this.getGeoCoordinates.bind(this);
     }
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
         });
+    }
+    getGeoCoordinates() {
+        LocationService.getGeoCoding(this.state.addressValue, this.state.cityValue, this.state.stateValue)
+            .then(result => {
+                this.setState({
+                    lat: result.data.results[0].geometry.location.lat,
+                    lng: result.data.results[0].geometry.location.lng
+                })
+            })
     }
     render() {
         return (
@@ -48,7 +61,13 @@ class LocationForm extends Component {
                         onChange={this.handleChange}
                     />
                 </Form.Field>
-                <Button primary>Submit</Button>
+                <Button primary onClick={this.getGeoCoordinates}>Submit</Button>
+                <hr />
+                <div className="data">
+                <Input label="latitude" value={this.state.lat} fluid></Input>
+                <br />
+                <Input label="longitude" value={this.state.lng} fluid></Input>
+                </div>
             </Form>
         );
     }

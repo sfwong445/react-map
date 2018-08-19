@@ -1,0 +1,11 @@
+.register-app {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register-form {
+    margin-top: 25px;
+    width: 35%;
+    padding: 10px;
+}
