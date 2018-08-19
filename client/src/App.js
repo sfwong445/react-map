@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {Button} from "semantic-ui-react";
 import Home from "./containers/Home";
-import Register from "./containers/registerForm";
+import Register from "./containers/Register";
 import Find from './containers/Find';
 import "./App.css";
 

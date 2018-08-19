@@ -21,17 +21,15 @@ export class FindComponent extends Component {
             [event.target.name]: event.target.value
         });
     }
-    getDistance() {
-        LocationService.getDistance(
+    async getDistance() {
+        const result = await LocationService.getDistance(
             this.state.lat1,
             this.state.lng1,
             this.state.lat2,
             this.state.lng2
-        ).then(result => {
-            console.log(result)
-            this.setState({
-                distance: result.data.routes[0].legs[0].distance.text
-            });
+        );
+        this.setState({
+            distance: result.data.routes[0].legs[0].distance.text
         });
     }
 
@@ -40,16 +38,36 @@ export class FindComponent extends Component {
             <div className="distance-container">
                 <div className="app-distance">
                     <label>Latitude 1</label>
-                    <Input value={this.state.lat1} name="lat1" onChange={this.handleChange} fluid />
+                    <Input
+                        value={this.state.lat1}
+                        name="lat1"
+                        onChange={this.handleChange}
+                        fluid
+                    />
                     <br />
                     <label>Longitude 1</label>
-                    <Input value={this.state.lng1} name="lng1" onChange={this.handleChange} fluid />
+                    <Input
+                        value={this.state.lng1}
+                        name="lng1"
+                        onChange={this.handleChange}
+                        fluid
+                    />
                     <br />
                     <label>Latitude 2</label>
-                    <Input value={this.state.lat2} name="lat2" onChange={this.handleChange} fluid />
+                    <Input
+                        value={this.state.lat2}
+                        name="lat2"
+                        onChange={this.handleChange}
+                        fluid
+                    />
                     <br />
                     <label>Longitude 2</label>
-                    <Input value={this.state.lng2} name="lng2" onChange={this.handleChange} fluid />
+                    <Input
+                        value={this.state.lng2}
+                        name="lng2"
+                        onChange={this.handleChange}
+                        fluid
+                    />
                     <br />
                     <Button primary onClick={this.getDistance}>
                         Get Distance
