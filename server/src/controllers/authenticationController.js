@@ -17,5 +17,14 @@ module.exports = {
                 res.send(newUser);
             }
         });
+    },
+    findUser(req, res) {
+        User.find({}, (err, docs) => {
+            if (!err) {
+                res.send(docs);
+            } else {
+                console.log(err)
+            }
+        })
     }
 };
