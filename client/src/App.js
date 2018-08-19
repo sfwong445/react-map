@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import {Button} from "semantic-ui-react";
 import Home from "./containers/Home";
 import Register from "./containers/Register";
+import Login from './containers/Login';
 import Find from './containers/Find';
 import "./App.css";
 
@@ -16,12 +17,14 @@ class App extends Component {
                         <nav>
                             <Button as={Link}to="/" inverted>Home</Button>
                             <Button as={Link} to="/find" inverted>Find</Button>
+                            <Button as={Link} to="/login" inverted>Login</Button>
                             <Button as={Link} to="/register" inverted>Register</Button>
                         </nav>
                     </header>
                     <nav />
                     <hr />
                     <Route exact path="/" component={Home} />
+                    <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
                     <Route path="/find" component={Find} />
                 </div>
