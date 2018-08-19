@@ -10,30 +10,14 @@ class LocationForm extends Component {
             addressValue: "",
             cityValue: "",
             stateValue: "",
-            lat: "",
-            lng: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.getGeoCoordinates = this.getGeoCoordinates.bind(this);
     }
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
         });
-    }
-    async getGeoCoordinates() {
-        const result = await LocationService.getGeoCoding(
-            this.state.addressValue,
-            this.state.cityValue,
-            this.state.stateValue
-        );
-        this.setState({
-            lat: result.data.results[0].geometry.location.lat,
-            lng: result.data.results[0].geometry.location.lng
-        });
-        console.log(typeof(this.state.lat));
-        console.log(typeof(this.state.lng));
     }
     render() {
         return (
@@ -68,12 +52,6 @@ class LocationForm extends Component {
                 <Button primary onClick={this.getGeoCoordinates}>
                     Submit
                 </Button>
-                <hr />
-                <div className="data">
-                    <Input label="latitude" value={this.state.lat} fluid />
-                    <br />
-                    <Input label="longitude" value={this.state.lng} fluid />
-                </div>
             </Form>
         );
     }
