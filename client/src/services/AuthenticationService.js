@@ -9,5 +9,11 @@ export default {
             city: city,
             state: state
         });
+    },
+    async login(username, password) {
+        return await Api().post("http://localhost:8081/user/login", {
+            username: username,
+            password: password
+        })
     }
 };

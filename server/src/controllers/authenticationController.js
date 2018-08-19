@@ -19,6 +19,7 @@ module.exports = {
             }
         });
     },
+
     findUser(req, res) {
         User.find({}, (err, docs) => {
             if (!err) {
@@ -26,6 +27,12 @@ module.exports = {
             } else {
                 console.log(err)
             }
+        })
+    },
+
+    login(req, res) {
+        User.find({
+            username: req.body.username
         })
     }
 };

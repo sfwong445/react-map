@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Home extends Component {
     render() {
         return (
             <div className="container">
-                <p>This is the home directory!</p>
+                <h1>This is the home directory!</h1>
             </div>
-        )
+        );
     }
 }
 
-export default Home
+export default Home;
