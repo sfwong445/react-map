@@ -12,7 +12,6 @@ class LoginForm extends Component {
         this.state = {
             username: "",
             password: "",
-            id: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,10 +25,7 @@ class LoginForm extends Component {
 
     async handleSubmit() {
         const response = await AuthenticationService.login(this.state.username, this.state.password);
-        this.setState({
-            id: response.data._id
-        })
-        this.props.handleLogin(this.state.id)
+        this.props.handleLogin(response.data._id)
         this.props.history.push('/');
     }
 

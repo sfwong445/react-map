@@ -14,6 +14,12 @@ export default {
         return await Api().post("http://localhost:8081/user/login", {
             username: username,
             password: password
-        })
+        });
+    },
+    async getUser(token) {
+        return await Api().get(`http://localhost:8081/user/${token}`);
+    },
+    async getUsers() {
+        return await Api().get("http://localhost:8081/");
     }
 };

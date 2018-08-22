@@ -45,7 +45,7 @@ module.exports = {
             username: req.body.username
         });
         if (user) {
-            const match = bcrypt.compare(req.body.password, user.password)
+            const match = bcrypt.compare(req.body.password, user.password);
             if (match) {
                 res.send(user);
             } else {
@@ -57,6 +57,16 @@ module.exports = {
             res.status(500).send({
                 message: "Invalid user"
             });
+        }
+    },
+    async find(req, res) {
+        try {
+            const user = await User.findById(req.params.id).exec();
+            res.send(user);
+        } catch (err) {
+            res.send({
+                message: 'An error occured trying to find the user'
+            })
         }
     }
 };
