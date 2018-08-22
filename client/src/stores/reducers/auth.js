@@ -1,4 +1,4 @@
-import { Login, Logout } from '../actions';
+import { LOGIN, LOGOUT } from '../actions';
 
 const initialState = {
     isLoggedOn: false,
@@ -7,13 +7,13 @@ const initialState = {
 
 function auth(state = initialState, action) {
     switch (action.type) {
-        case Login: {
+        case LOGIN: {
             return Object.assign({}, state, {
                 isLoggedOn: true,
                 token: action.token
             })
         }
-        case Logout: {
+        case LOGOUT: {
             return initialState;
         }
         default: {

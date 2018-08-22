@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
 
+import { connect } from 'react-redux';
+import { Login } from '../stores/actions';
+
 import AuthenticationService from '../services/AuthenticationService';
 
-class Login extends Component {
+class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            id: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,10 +24,14 @@ class Login extends Component {
         });
     }
 
-    handleSubmit() {
-        AuthenticationService.login(this.state.username, this.state.password);
+    async handleSubmit() {
+        const response = await AuthenticationService.login(this.state.username, this.state.password);
+        this.setState({
+            id: response.data._id
+        })
+        this.props.handleLogin(this.state.id)
+        this.props.history.push('/');
     }
-    
 
     render() {
         return (
@@ -36,7 +44,6 @@ class Login extends Component {
                             name="username"
                             value={this.state.username}
                             onChange={this.handleChange}
-                            fluid
                         />
                     </Form.Field>
                     <Form.Field>
@@ -47,7 +54,6 @@ class Login extends Component {
                             name="password"
                             value={this.state.password}
                             onChange={this.handleChange}
-                            fluid
                         />
                     </Form.Field>
                     <Button primary onClick={this.handleSubmit}>Login</Button>
@@ -57,4 +63,17 @@ class Login extends Component {
     }
 }
 
-export default Login;
+function mapStatetoProps(state) {
+    return {
+        isLoggedOn: state.isLoggedOn,
+        token: state.token
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        handleLogin: (token) => dispatch(Login(token))
+    }
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(LoginForm);
