@@ -11,7 +11,8 @@ module.exports = {
                 password: password,
                 address: req.body.address,
                 city: req.body.city,
-                state: req.body.state
+                state: req.body.state,
+                profileImg: req.body.image
             });
             newUser.save(err => {
                 if (err) {

@@ -5,6 +5,7 @@ const postController = require('./controllers/postController');
 module.exports = app => {
     app.get("/", authenticationController.findUser);
     app.get("/user/?:id", authenticationController.find);
+    app.get("/posts", postController.getAllPosts);
     app.get(`/posts/?:userId`, postController.getPosts);
     app.post("/user/register", authenticationController.createUser);
     app.post("/user/login", authenticationController.login);

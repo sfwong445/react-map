@@ -15,7 +15,8 @@ class RegisterForm extends Component {
             password: "",
             address: "",
             city: "",
-            state: ""
+            state: "",
+            image: ""
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,7 +35,8 @@ class RegisterForm extends Component {
             this.state.password,
             this.state.address,
             this.state.city,
-            this.state.state
+            this.state.state,
+            this.state.image
         );
         this.props.handleLogin(response.data._id);
         this.props.history.push('/');
@@ -77,6 +79,13 @@ class RegisterForm extends Component {
                         placeholder="State"
                         name="state"
                         value={this.state.state}
+                        onChange={this.handleChange}
+                    />
+                    <Form.Input
+                        label="Image"
+                        placeholder="Profile Image"
+                        name="profileImg"
+                        value={this.state.image}
                         onChange={this.handleChange}
                     />
                     <Button primary onClick={this.Register}>

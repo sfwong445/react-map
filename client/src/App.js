@@ -8,6 +8,7 @@ import Register from "./containers/Register";
 import Login from "./containers/Login";
 import Find from "./containers/Find";
 import "./App.css";
+import CreatePost from "./containers/CreatePost";
 
 class App extends Component {
     constructor(props) {
@@ -20,20 +21,24 @@ class App extends Component {
     }
 
     render() {
-        const isLoggedOn = this.props.isLoggedOn
+        const isLoggedOn = this.props.isLoggedOn;
         return (
             <Router>
                 <div className="App">
                     <header className="App-header">
                         <h1 className="App-title">Welcome to React</h1>
-                        <GetNavigation isLoggedIn={isLoggedOn} func={this.handleLogout}></GetNavigation>
+                        <GetNavigation
+                            isLoggedIn={isLoggedOn}
+                            func={this.handleLogout}
+                        />
                     </header>
                     <nav />
                     <hr />
                     <Route exact path="/" component={Home} />
                     <Route path="/login" component={Login} />
                     <Route path="/register" component={Register} />
-                    <Route path="/find" component={Find} />
+                    <Route exact path="/find" component={Find} />
+                    <Route path="/find/create" component={CreatePost} />
                 </div>
             </Router>
         );
@@ -61,6 +66,9 @@ function GetNavigation(props) {
                 <Button as={Link} to="/" inverted>
                     Home
                 </Button>
+                <Button as={Link} to="/find" inverted>
+                    Find
+                </Button>
                 <Button as={Link} to="/login" inverted>
                     Login
                 </Button>
@@ -78,7 +86,9 @@ function GetNavigation(props) {
                 <Button as={Link} to="/find" inverted>
                     Find
                 </Button>
-                <Button onClick={props.func} inverted>Logout</Button>
+                <Button onClick={props.func} inverted>
+                    Logout
+                </Button>
             </nav>
         );
     }

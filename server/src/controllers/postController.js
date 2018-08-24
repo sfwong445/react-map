@@ -5,6 +5,7 @@ module.exports = {
         try {
             const newPost = await new Post({
                 userId: req.body.userId,
+                title: req.body.title,
                 imageUrl: req.body.imageUrl,
                 description: req.body.description,
                 email: req.body.email
@@ -23,5 +24,9 @@ module.exports = {
             userId: req.params.userId
         }).exec();
         res.send(posts);
+    },
+    async getAllPosts(req, res) {
+        const posts = await Post.find({}).exec();
+        res.send(posts)
     }
 };

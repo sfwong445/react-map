@@ -40,3 +40,8 @@
   width: 35%;
   text-align: center;
 }
+
+.post-create-container {
+  width: 40%;
+  align-self: center;
+}
