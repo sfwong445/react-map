@@ -5,6 +5,8 @@ module.exports = {
         try {
             const newPost = await new Post({
                 userId: req.body.userId,
+                name: req.body.name,
+                postImg: req.body.postImg,
                 title: req.body.title,
                 imageUrl: req.body.imageUrl,
                 description: req.body.description,

@@ -12,6 +12,7 @@ class CreatePost extends Component {
         this.state = {
             name: "",
             title: "",
+            postImg: "",
             description: "",
             imageUrl: "",
             email: ""
@@ -29,6 +30,7 @@ class CreatePost extends Component {
             userId: this.props.token,
             name: this.state.name,
             title: this.state.title,
+            postImg: this.state.postImg,
             description: this.state.description,
             imageUrl: this.state.imageUrl,
             email: this.state.email
@@ -47,6 +49,15 @@ class CreatePost extends Component {
                             placeholder="Name"
                             name="name"
                             value={this.state.name}
+                            onChange={this.handleChange}
+                        />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Post Image</label>
+                        <input
+                            placeholder="Post Image"
+                            name="postImg"
+                            value={this.state.postImg}
                             onChange={this.handleChange}
                         />
                     </Form.Field>

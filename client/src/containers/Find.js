@@ -62,71 +62,38 @@ export class FindComponent extends Component {
         }
     }
     render() {
-        if (this.props.isLoggedIn) {
-            console.log(this.state);
-        }
-        const events = this.state.posts.map(post => ({
-            summary: post.title,
-            extraText: post.description,
-            extraImages: [post.imageUrl]
-        }))
-        console.log(events)
+        const events = this.state.posts.map(post => (
+            <Feed.Event key={post._id}>
+                <Feed.Label>
+                    <img src={post.postImg} />
+                </Feed.Label>
+                <Feed.Content>
+                    <Feed.Summary>
+                        <Feed.User>{post.name}</Feed.User> {post.title}
+                    </Feed.Summary>
+                    <Feed.Extra text>
+                        {post.description}
+                    </Feed.Extra>
+                    <Feed.Extra images>
+                        <img src={post.imageUrl} />
+                    </Feed.Extra>
+                    <Feed.Meta>
+                        <Button circular icon="delete" size="mini" inverted />
+                        <Button circular icon="edit" size="mimi" inverted />
+                    </Feed.Meta>
+                </Feed.Content>
+            </Feed.Event>
+        ))
         return (
             <div className="find-container">
                 <h1>Posts</h1>
                 <div className="find-button">
-                    <Button as={Link} to={"/find/create"} primary>
-                        Create Post
-                    </Button>
+                    <Button as={Link} to={"/find/create"} icon="file alternate" color="google plus" />
                 </div>
                 <div className="post">
                     <Feed size="large">
-                        <Feed.Event>
-                            <Feed.Label>
-                                <img
-                                    src="https://scontent-sjc3-1.cdninstagram.com/vp/eb7357e7a6b139b09a0ceee1a5efa04d/5BFB2FA7/t51.2885-19/23824971_295605060931256_6109301832771698688_n.jpg"
-                                    alt="mirae"
-                                />
-                            </Feed.Label>
-                            <Feed.Content>
-                                <Feed.Summary>
-                                    <Feed.User>Mirae Yi</Feed.User> has posted
-                                    <Feed.Date>3 days ago</Feed.Date>
-                                </Feed.Summary>
-                                <Feed.Extra text>
-                                    A summary by Mirae Yi.
-                                </Feed.Extra>
-                                <Feed.Extra images>
-                                    <img
-                                        src="https://scontent-sjc3-1.cdninstagram.com/vp/b4a08186198e4695805f5d8e08b42158/5C169602/t51.2885-15/e35/37966764_2141999412735175_1776154038446850048_n.jpg"
-                                        alt="Mirae"
-                                    />
-                                </Feed.Extra>
-                            </Feed.Content>
-                        </Feed.Event>
-                        <Feed.Event>
-                            <Feed.Label>
-                                <img
-                                    src="https://i.pinimg.com/236x/9d/58/d1/9d58d1fba36aa76996b5de3f3d233d22.jpg"
-                                    alt="dino"
-                                />
-                            </Feed.Label>
-                            <Feed.Content>
-                                <Feed.Summary>
-                                    <Feed.User>Dino Schneider</Feed.User> has
-                                    uploaded an image.
-                                    <Feed.Date>5 days ago</Feed.Date>
-                                </Feed.Summary>
-                                <Feed.Extra images>
-                                    <img
-                                        src="https://thumbs.dreamstime.com/z/crow-orange-background-flaps-its-wings-throws-black-balls-37111364.jpg"
-                                        alt="crow"
-                                    />
-                                </Feed.Extra>
-                            </Feed.Content>
-                        </Feed.Event>
+                        {events}
                     </Feed>
-                    <Feed events={events}></Feed>
                 </div>
             </div>
         );

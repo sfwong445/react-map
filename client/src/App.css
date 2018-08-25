@@ -45,3 +45,12 @@
   width: 40%;
   align-self: center;
 }
+
+.post {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

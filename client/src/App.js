@@ -66,9 +66,6 @@ function GetNavigation(props) {
                 <Button as={Link} to="/" inverted>
                     Home
                 </Button>
-                <Button as={Link} to="/find" inverted>
-                    Find
-                </Button>
                 <Button as={Link} to="/login" inverted>
                     Login
                 </Button>
