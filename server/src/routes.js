@@ -11,4 +11,5 @@ module.exports = app => {
     app.post("/user/login", authenticationController.login);
     app.post("/distance", locationController.findDistance);
     app.post('/posts/create', postController.createPost);
+    app.post('/posts/delete', postController.deletepost);
 };

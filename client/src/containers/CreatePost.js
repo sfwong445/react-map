@@ -35,8 +35,7 @@ class CreatePost extends Component {
             imageUrl: this.state.imageUrl,
             email: this.state.email
         };
-        const response = await PostService.createPost(post);
-        console.log(response);
+        await PostService.createPost(post);
         this.props.history.push('/find');
     }
     render() {

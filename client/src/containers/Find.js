@@ -18,7 +18,7 @@ export class FindComponent extends Component {
             users: "",
             distance: ""
         };
-        this.getData();
+        this.handleDelete = this.handleDelete.bind(this);
     }
     async getData() {
         // When logged in, the component will fetch all the related posts required from db and concat into a single array.
@@ -26,16 +26,12 @@ export class FindComponent extends Component {
             // This line gets informati on the current user.
             const user = (await AuthenticationService.getUser(this.props.token))
                 .data;
-            this.setState({
-                distance: user
-            });
             // Now we need to get all the users in the database
             const users = (await AuthenticationService.getUsers()).data;
             // Then filter out everyone in the database so only the same city matches
             const filteredUser = users.filter(
-                user => user.city === this.state.distance.city
+                newUser => newUser.city === user.city
             );
-            this.setState({ users: filteredUser });
             // Get all the posts from users that have been sorted out.
             const posts = [];
             for (let i = 0; i < filteredUser.length; i++) {
@@ -55,45 +51,63 @@ export class FindComponent extends Component {
                 finalPost = finalPost.concat(reducedPost[j]);
             }
             this.setState({
+                distance: user,
+                users: filteredUser,
                 posts: finalPost
             });
         } else {
             console.log("You are not logged on!");
         }
     }
+    async handleDelete(postId) {
+        await PostService.deletePost({
+            _id: postId
+        });
+        this.getData();
+    }
+    async componentDidMount() {
+        this.getData();
+    }
     render() {
         const events = this.state.posts.map(post => (
             <Feed.Event key={post._id}>
                 <Feed.Label>
-                    <img src={post.postImg} alt={post.description}/>
+                    <img src={post.postImg} alt={post.description} />
                 </Feed.Label>
                 <Feed.Content>
                     <Feed.Summary>
                         <Feed.User>{post.name}</Feed.User> {post.title}
                     </Feed.Summary>
-                    <Feed.Extra text>
-                        {post.description}
-                    </Feed.Extra>
+                    <Feed.Extra text>{post.description}</Feed.Extra>
                     <Feed.Extra images>
                         <img src={post.imageUrl} alt={post.description} />
                     </Feed.Extra>
                     <Feed.Meta>
-                        <Button circular icon="delete" size="mini" inverted />
-                        <Button circular icon="edit" size="mimi" inverted />
+                        <Button
+                            circular
+                            icon="delete"
+                            size="mini"
+                            inverted
+                            onClick={() => this.handleDelete(post._id)}
+                        />
+                        <Button circular icon="edit" size="mini" inverted />
                     </Feed.Meta>
                 </Feed.Content>
             </Feed.Event>
-        ))
+        ));
         return (
             <div className="find-container">
                 <h1>Posts</h1>
                 <div className="find-button">
-                    <Button as={Link} to={"/find/create"} icon="file alternate" color="google plus" />
+                    <Button
+                        as={Link}
+                        to={"/find/create"}
+                        icon="file alternate"
+                        color="google plus"
+                    />
                 </div>
                 <div className="post">
-                    <Feed size="large">
-                        {events}
-                    </Feed>
+                    <Feed size="large">{events}</Feed>
                 </div>
             </div>
         );
