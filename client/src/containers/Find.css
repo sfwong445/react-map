@@ -1,0 +1,25 @@
+.find-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.find-container h1 {
+    width: 100%;
+}
+
+.find-button {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.post {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+}

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
 import "./Register.css";
 
+import { connect } from "react-redux";
+import { Login } from "../stores/actions";
+
 import AuthenticationService from "../services/AuthenticationService";
 
 class RegisterForm extends Component {
@@ -24,15 +27,23 @@ class RegisterForm extends Component {
             [event.target.name]: event.target.value
         });
     }
-    async Register() {
-        const response = await AuthenticationService.register(
-            this.state.username,
-            this.state.password,
-            this.state.latitude,
-            this.state.longitude
-        );
-    }
 
+    async Register() {
+        try {
+            const response = await AuthenticationService.register(
+                this.state.username,
+                this.state.password,
+                this.state.address,
+                this.state.city,
+                this.state.state,
+            );
+            this.props.handleLogin(response.data._id);
+            this.props.history.push("/");
+        } catch (err) {
+            console.log(err);
+            alert("An error has occured registering");
+        }
+    }
     render() {
         return (
             <div className="register-app">
@@ -82,4 +93,20 @@ class RegisterForm extends Component {
     }
 }
 
-export default RegisterForm;
+function mapStateToProps(state) {
+    return {
+        isLoggedOn: state.isLoggedOn,
+        token: state.token
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        handleLogin: token => dispatch(Login(token))
+    };
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(RegisterForm);
