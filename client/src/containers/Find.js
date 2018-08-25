@@ -98,6 +98,14 @@ export class FindComponent extends Component {
                             as={Link}
                             to={`/find/edit/${post._id}`}
                         />
+                        <Button
+                            circular
+                            icon="envelope"
+                            size="mini"
+                            inverted
+                            as={'a'}
+                            href={`mailto:${post.email}`}
+                        />
                     </Feed.Meta>
                 </Feed.Content>
             </Feed.Event>
