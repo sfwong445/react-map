@@ -39,6 +39,10 @@ class CreatePost extends Component {
         this.props.history.push("/find");
     }
     render() {
+        if (!this.props.isLoggedOn) {
+            alert("Please login before creating a post");
+            this.props.history.push("/login");
+        }
         return (
             <div className="post-create-container">
                 <Form>
