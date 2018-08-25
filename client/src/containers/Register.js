@@ -30,16 +30,21 @@ class RegisterForm extends Component {
     }
 
     async Register() {
-        const response = await AuthenticationService.register(
-            this.state.username,
-            this.state.password,
-            this.state.address,
-            this.state.city,
-            this.state.state,
-            this.state.image
-        );
-        this.props.handleLogin(response.data._id);
-        this.props.history.push('/');
+        try {
+            const response = await AuthenticationService.register(
+                this.state.username,
+                this.state.password,
+                this.state.address,
+                this.state.city,
+                this.state.state,
+                this.state.image
+            );
+            this.props.handleLogin(response.data._id);
+            this.props.history.push("/");
+        } catch (err) {
+            console.log(err);
+            alert("An error has occured registering");
+        }
     }
     render() {
         return (
@@ -106,7 +111,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        handleLogin: (token) => dispatch(Login(token))
+        handleLogin: token => dispatch(Login(token))
     };
 }
 

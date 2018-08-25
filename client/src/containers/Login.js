@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import { Button, Form } from "semantic-ui-react";
 
-import { connect } from 'react-redux';
-import { Login } from '../stores/actions';
+import { connect } from "react-redux";
+import { Login } from "../stores/actions";
 
-import AuthenticationService from '../services/AuthenticationService';
+import AuthenticationService from "../services/AuthenticationService";
 
 class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: "",
-            password: "",
+            password: ""
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,9 +24,17 @@ class LoginForm extends Component {
     }
 
     async handleSubmit() {
-        const response = await AuthenticationService.login(this.state.username, this.state.password);
-        this.props.handleLogin(response.data._id)
-        this.props.history.push('/');
+        try {
+            const response = await AuthenticationService.login(
+                this.state.username,
+                this.state.password
+            );
+            this.props.handleLogin(response.data._id);
+            this.props.history.push("/");
+        } catch (err) {
+            console.log(err);
+            alert("An error has occured while logging in");
+        }
     }
 
     render() {
@@ -52,7 +60,9 @@ class LoginForm extends Component {
                             onChange={this.handleChange}
                         />
                     </Form.Field>
-                    <Button primary onClick={this.handleSubmit}>Login</Button>
+                    <Button primary onClick={this.handleSubmit}>
+                        Login
+                    </Button>
                 </Form>
             </div>
         );
@@ -68,8 +78,11 @@ function mapStatetoProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        handleLogin: (token) => dispatch(Login(token))
-    }
+        handleLogin: token => dispatch(Login(token))
+    };
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(LoginForm);
+export default connect(
+    mapStatetoProps,
+    mapDispatchToProps
+)(LoginForm);

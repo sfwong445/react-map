@@ -65,7 +65,7 @@ export class FindComponent extends Component {
         const events = this.state.posts.map(post => (
             <Feed.Event key={post._id}>
                 <Feed.Label>
-                    <img src={post.postImg} />
+                    <img src={post.postImg} alt={post.description}/>
                 </Feed.Label>
                 <Feed.Content>
                     <Feed.Summary>
@@ -75,7 +75,7 @@ export class FindComponent extends Component {
                         {post.description}
                     </Feed.Extra>
                     <Feed.Extra images>
-                        <img src={post.imageUrl} />
+                        <img src={post.imageUrl} alt={post.description} />
                     </Feed.Extra>
                     <Feed.Meta>
                         <Button circular icon="delete" size="mini" inverted />
