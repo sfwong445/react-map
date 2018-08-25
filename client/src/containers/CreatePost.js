@@ -25,7 +25,7 @@ class CreatePost extends Component {
             [event.target.name]: event.target.value
         });
     }
-    async handleSubmit(event) {
+    async handleSubmit() {
         const post = {
             userId: this.props.token,
             name: this.state.name,
@@ -36,7 +36,7 @@ class CreatePost extends Component {
             email: this.state.email
         };
         await PostService.createPost(post);
-        this.props.history.push('/find');
+        this.props.history.push("/find");
     }
     render() {
         return (

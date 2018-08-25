@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const saltRounds = require("../../../key").saltRounds;
+
 const bcrypt = require("bcrypt");
 
 module.exports = {
@@ -42,21 +43,27 @@ module.exports = {
     },
 
     async login(req, res) {
-        const user = await User.findOne({
-            username: req.body.username
-        });
-        if (user) {
-            const match = bcrypt.compare(req.body.password, user.password);
-            if (match) {
-                res.send(user);
+        try {
+            const user = await User.findOne({
+                username: req.body.username
+            });
+            if (user) {
+                const match = bcrypt.compare(req.body.password, user.password);
+                if (match) {
+                    res.send(user);
+                } else {
+                    res.status(500).send({
+                        message: "Invalid password"
+                    });
+                }
             } else {
                 res.status(500).send({
-                    message: "Invalid password"
+                    message: "Invalid user"
                 });
             }
-        } else {
+        } catch (err) {
             res.status(500).send({
-                message: "Invalid user"
+                message: "An error occured while trying to login!"
             });
         }
     },
@@ -66,8 +73,8 @@ module.exports = {
             res.send(user);
         } catch (err) {
             res.send({
-                message: 'An error occured trying to find the user'
-            })
+                message: "An error occured trying to find the user"
+            });
         }
     }
 };

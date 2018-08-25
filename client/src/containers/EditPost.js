@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import { Form, Button } from "semantic-ui-react";
 
 import PostService from "../services/PostService";
-
 
 class EditPost extends Component {
     constructor(props) {
@@ -45,14 +45,21 @@ class EditPost extends Component {
 
     async getPostData() {
         const post = (await PostService.findPost(this.props.match.params.postId)).data;
-        this.setState({
-            name: post.name,
-            title: post.title,
-            postImg: post.postImg,
-            description: post.description,
-            imageUrl: post.imageUrl,
-            email: post.email
-        })
+        console.log(this.props);
+        console.log(post);
+        if (this.props.token === post.userId) {
+            this.setState({
+                name: post.name,
+                title: post.title,
+                postImg: post.postImg,
+                description: post.description,
+                imageUrl: post.imageUrl,
+                email: post.email
+            })
+        } else {
+            alert('You do not have access to this post')
+            this.props.history.push('/find')
+        }
     }
 
     render() {
@@ -122,5 +129,11 @@ class EditPost extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        isLoggedIn: state.isLoggedOn,
+        token: state.token
+    }
+}
 
-export default EditPost;
+export default connect(mapStateToProps)(EditPost);

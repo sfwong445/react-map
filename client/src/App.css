@@ -34,6 +34,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+}
+
+.container h1 {
+  width: 100%;
+}
+
+.container p {
+  width: 70%;
+  text-align: left;
+  color: blue;
 }
 
 .app-distance {
@@ -63,4 +74,10 @@
 .images.extra {
   height: 300px;
   width: 100%;
+}
+
+.player {
+  width: 600px;
+  height: 350px;
+  align-self: center;
 }

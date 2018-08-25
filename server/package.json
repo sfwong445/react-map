@@ -9,10 +9,12 @@
     "body-parser": "^1.18.3",
     "cors": "^2.8.4",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.9",
     "morgan": "^1.9.0",
     "node-fetch": "^2.2.0",
-    "nodemon": "^1.18.3"
+    "nodemon": "^1.18.3",
+    "passport-http-bearer": "^1.0.1"
   },
   "scripts": {
     "start": "nodemon src/app.js"

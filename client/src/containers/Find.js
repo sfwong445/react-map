@@ -60,10 +60,15 @@ export class FindComponent extends Component {
         }
     }
     async handleDelete(postId) {
-        await PostService.deletePost({
-            _id: postId
-        });
-        this.getData();
+        const postResponse = await PostService.findPost(postId)
+        if (this.props.token === postResponse.data.userId) {
+            await PostService.deletePost({
+                _id: postId
+            });
+            this.getData();
+        } else {
+            alert('You do not have access to this post')
+        }
     }
     async componentDidMount() {
         this.getData();
