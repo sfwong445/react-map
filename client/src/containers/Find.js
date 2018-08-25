@@ -90,7 +90,14 @@ export class FindComponent extends Component {
                             inverted
                             onClick={() => this.handleDelete(post._id)}
                         />
-                        <Button circular icon="edit" size="mini" inverted />
+                        <Button
+                            circular
+                            icon="edit"
+                            size="mini"
+                            inverted
+                            as={Link}
+                            to={`/find/edit/${post._id}`}
+                        />
                     </Feed.Meta>
                 </Feed.Content>
             </Feed.Event>
@@ -107,7 +114,9 @@ export class FindComponent extends Component {
                     />
                 </div>
                 <div className="post">
-                    <Feed size="large">{events}</Feed>
+                    <Feed size="large" className="ui feed">
+                        {events}
+                    </Feed>
                 </div>
             </div>
         );

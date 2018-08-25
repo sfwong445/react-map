@@ -46,5 +46,39 @@ module.exports = {
                 message: "An error occured while trying to delete the posts"
             });
         }
+    },
+
+    async findPost(req, res) {
+        try {
+            const post = await Post.findOne({
+                _id: req.params.postId
+            }).exec();
+            res.send(post)
+        } catch (err) {
+            res.status(500).send({
+                message: "An error occured trying to find the post"
+            })
+        }
+    },
+
+    async updatePost(req, res) {
+        try {
+            console.log(req.body)
+            const post = await Post.updateOne({
+                _id: req.body._id
+            },{
+                name: req.body.name,
+                title: req.body.title,
+                postImg: req.body.postImg,
+                description: req.body.description,
+                imageUrl: req.body.imageUrl,
+                email: req.body.email
+            }).exec()
+            res.send(post)
+        } catch (err) {
+            res.status(500).send({
+                message: 'An error occured trying to update the post'
+            })
+        }
     }
 };

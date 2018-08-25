@@ -1,14 +1,20 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Route,
+    Link
+} from "react-router-dom";
 import { connect } from "react-redux";
 import { Logout } from "./stores/actions";
 import { Button } from "semantic-ui-react";
 import Home from "./containers/Home";
-import Register from "./containers/Register";
-import Login from "./containers/Login";
-import Find from "./containers/Find";
-import "./App.css";
 import CreatePost from "./containers/CreatePost";
+import Find from "./containers/Find";
+import Login from "./containers/Login";
+import Register from "./containers/Register";
+import EditPost from "./containers/EditPost";
+
+import "./App.css";
 
 class App extends Component {
     constructor(props) {
@@ -16,15 +22,16 @@ class App extends Component {
         this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleLogout() {
-        this.props.handleLogout();
+    async handleLogout() {
+        await this.props.handleLogout();
+        window.location.assign('/')
     }
 
     render() {
         const isLoggedOn = this.props.isLoggedOn;
         return (
             <Router>
-                <div className="App">
+                <div className="App"> 
                     <header className="App-header">
                         <h1 className="App-title">Welcome to React</h1>
                         <GetNavigation
@@ -39,6 +46,7 @@ class App extends Component {
                     <Route path="/register" component={Register} />
                     <Route exact path="/find" component={Find} />
                     <Route path="/find/create" component={CreatePost} />
+                    <Route path="/find/edit/:postId" component={EditPost} />
                 </div>
             </Router>
         );

@@ -23,5 +23,21 @@ export default {
         } catch (err) {
             console.log(err);
         }
+    },
+
+    async findPost(postId) {
+        try {
+            return Api().get(`http://localhost:8081/posts/find/${postId}`);
+        } catch (err) {
+            console.log(err);
+        }
+    },
+
+    async updatePost(post) {
+        try {
+            return Api().post("http://localhost:8081/posts/update", post);
+        } catch (err) {
+            console.log(err);
+        }
     }
 };
