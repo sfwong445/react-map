@@ -1,8 +1,62 @@
-# react-map
-This app was designed to allow users to place posts to share any free stuff they have to offer.
+# React Map
 
-The basis will also serve as a boilerplate for any location based comment board/social media network. 
+This is a boiler plate post application. This servers as a concept boilerplate for any other posting platforms.
 
-Currently the application only outputs post from the same city as the registered user. This can be changed to sort by zip code at a later date.
+## Functionality
 
-This only a concept.
+Users can:
+
+-   Register and Login
+-   View/Add/Edit/Delete Posts
+-   Email the poster
+
+In the backend, the server only returns posts in the same city as the registered user.
+
+## Technologies Used
+
+-   PostgreSQL
+-   Node (Express JS)
+-   React
+-   Semantic-Ui
+
+## Screenshots
+
+### Home
+
+![Home](screenshots/home.png)
+
+### Post
+
+![Post](screenshots/post.png)
+
+### Edit Post
+
+![Edit](screenshots/edit.png)
+
+### Login
+
+![Login](screenshots/login.png)
+
+### Register
+
+![Register](screenshots/register.png)
+
+## Installation
+
+Run the following commands. Clone the directory.
+
+```sh
+cd client
+npm install
+npm start
+```
+
+Open a separate terminal in the same directory
+
+```sh
+cd server
+npm install
+npm start
+```
+
+Then open two different terminals and change directory

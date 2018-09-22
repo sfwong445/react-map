@@ -1,7 +1,7 @@
-const User = require("../models/user");
-const saltRounds = require("../../../key").saltRounds;
+const User = require('../models/user');
+const saltRounds = 10;
 
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 
 module.exports = {
     async createUser(req, res) {
@@ -18,7 +18,7 @@ module.exports = {
             newUser.save(err => {
                 if (err) {
                     res.status(500).send({
-                        message: "This user already exists"
+                        message: 'This user already exists'
                     });
                 } else {
                     res.send(newUser);
@@ -27,7 +27,7 @@ module.exports = {
         } catch (err) {
             console.log(err);
             res.status(500).send({
-                message: "An error occured"
+                message: 'An error occured'
             });
         }
     },
@@ -53,17 +53,17 @@ module.exports = {
                     res.send(user);
                 } else {
                     res.status(500).send({
-                        message: "Invalid password"
+                        message: 'Invalid password'
                     });
                 }
             } else {
                 res.status(500).send({
-                    message: "Invalid user"
+                    message: 'Invalid user'
                 });
             }
         } catch (err) {
             res.status(500).send({
-                message: "An error occured while trying to login!"
+                message: 'An error occured while trying to login!'
             });
         }
     },
@@ -73,7 +73,7 @@ module.exports = {
             res.send(user);
         } catch (err) {
             res.send({
-                message: "An error occured trying to find the user"
+                message: 'An error occured trying to find the user'
             });
         }
     }
