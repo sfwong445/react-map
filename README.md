@@ -14,7 +14,7 @@ In the backend, the server only returns posts in the same city as the registered
 
 ## Technologies Used
 
--   PostgreSQL
+-   MongoDB
 -   Node (Express JS)
 -   React
 -   Semantic-Ui
